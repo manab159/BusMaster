@@ -1,21 +1,30 @@
 from django.db import models
-
+#from django.db import admin
 # Create your models here.
 
-class routeMaster(models.Model):
+
+class BaseModelWithTime(models.Model):
+    created_at=models.DateTimeField(auto_now_add=True)
+    modified_at=models.DateTimeField(auto_now=True)
+    class Meta:
+        abstract=True
+
+
+
+class routeMaster(BaseModelWithTime):
     rid=models.AutoField(primary_key=True)
     rname=models.CharField(max_length=20,unique=True)
-    def __str__(self):
-        return self.rname
+    # def __str__(self):
+    #     return self.rname
 
 
-class stopMaster(models.Model):
+class stopMaster(BaseModelWithTime):
     sid=models.AutoField(primary_key=True)
     sname=models.CharField(max_length=20,unique=True)
     def __str__(self):
         return self.sname
 
-class routeStop(models.Model):
+class routeStop(BaseModelWithTime):
     rsid=models.AutoField(primary_key=True)
     stop_id=models.ForeignKey(stopMaster, on_delete=models.CASCADE)
     route_id=models.ForeignKey(routeMaster, on_delete=models.CASCADE)

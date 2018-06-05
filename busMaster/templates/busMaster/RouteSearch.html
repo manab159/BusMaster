@@ -1,0 +1,14 @@
+<html>
+	<head>
+		<title>Route Search</title>
+	</head>
+	<body>
+		<form action="{% url 'busMaster:routeSearch'%}" method="post">
+			{% csrf_token %}
+		<!-- <form action="routeSearch" method="POST"> -->
+			<p>Enter the Stop Name</p>
+			<input type="text" name="stopName"/></br></br>
+			<input type="submit" value="submit"/>
+		</form>
+	</body>
+</html>
